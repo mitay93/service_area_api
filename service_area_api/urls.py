@@ -16,14 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 from rest_framework.routers import DefaultRouter
 from .views import ProviderViewSet, ServiceAreaViewSet
 
 router = DefaultRouter()
-router.register(r'providers', ProviderViewSet)
-router.register(r'service-areas', ServiceAreaViewSet)
+router.register(r'providers', ProviderViewSet, basename="providers")
+router.register(r'service-areas', ServiceAreaViewSet, basename="service-areas")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('docs/', include([
+        path("schema/", SpectacularAPIView.as_view(), name="schema"),
+        path("swagger/", SpectacularSwaggerView.as_view(), name="swagger")
+    ]))
 ]

@@ -30,6 +30,9 @@ class Provider(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = '-id',
+
 
 class ServiceArea(models.Model):
     name = models.CharField(
@@ -43,6 +46,7 @@ class ServiceArea(models.Model):
     )
     polygon = gis_models.PolygonField(
         verbose_name=_("polygon"),
+        spatial_index=True
     )
     provider = models.ForeignKey(
         verbose_name=_("provider"),
@@ -53,3 +57,6 @@ class ServiceArea(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = '-id',
