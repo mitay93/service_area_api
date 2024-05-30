@@ -160,8 +160,8 @@ SPECTACULAR_SETTINGS = {
     'PREPROCESSING_HOOKS': ['service_area_api.settings.preprocessing_filter_spec'],
 }
 
-GDAL_LIBRARY_PATH = '/opt/homebrew/opt/gdal/lib/libgdal.dylib'
-GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
+GDAL_LIBRARY_PATH = env("GDAL_LIBRARY_PATH", "")
+GEOS_LIBRARY_PATH = env("GEOS_LIBRARY_PATH", "")
 
 AWS_S3_ACCESS_KEY_ID = env("AWS_S3_ACCESS_KEY_ID", "")
 AWS_S3_SECRET_ACCESS_KEY = env("AWS_S3_SECRET_ACCESS_KEY", "")
