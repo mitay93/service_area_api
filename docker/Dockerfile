@@ -24,4 +24,4 @@ RUN apt-get update &&  \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT ["gunicorn", "--workers", "2", "--loglevel", "info", "--bind", "/tmp/sockets/backend.sock", "service_area_api.wsgi"]
+ENTRYPOINT ["gunicorn", "--workers", "2", "--log-level", "info", "--bind", "/tmp/sockets/backend.sock", "service_area_api.wsgi:application"]
