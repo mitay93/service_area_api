@@ -7,7 +7,7 @@ services:
       - .env
     restart: always
     volumes:
-      - ./sockets:/tmp/sockets/
+      - ./sockets:/app/sockets/
   db:
     image: postgis/postgis:16-3.4
     env_file:
