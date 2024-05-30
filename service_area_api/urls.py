@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 from rest_framework.routers import DefaultRouter
+from env import env
 from .views import ProviderViewSet, ServiceAreaViewSet
 
 router = DefaultRouter()
@@ -26,9 +27,9 @@ router.register(r'service-areas', ServiceAreaViewSet, basename="service-areas")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/', include(router.urls + [path(f"ht/{env('HEALTH_CHECK_TOKEN')}/", include('health_check.urls'))])),
     path('docs/', include([
         path("schema/", SpectacularAPIView.as_view(), name="schema"),
         path("swagger/", SpectacularSwaggerView.as_view(), name="swagger")
-    ]))
+    ])),
 ]

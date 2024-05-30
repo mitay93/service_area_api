@@ -18,5 +18,10 @@ ENV VIRTUAL_ENV=/app/.venv \
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 COPY . /app
+RUN apt-get update &&  \
+    apt-get install gdal-bin -y && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT [""]
+ENTRYPOINT ["gunicorn", "--workers", "2", "--loglevel", "info", "--bind", "/tmp/sockets/backend.sock", "service_area_api.wsgi"]

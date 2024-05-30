@@ -54,6 +54,24 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-health-check"
+version = "3.18.2"
+description = "Run checks on services like databases, queue servers, celery processes, etc."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_health_check-3.18.2-py2.py3-none-any.whl", hash = "sha256:16f9c9186236cbc2858fa0d0ecc3566ba2ad2b72683e5678d0d58eb9e8bbba1a"},
+    {file = "django_health_check-3.18.2.tar.gz", hash = "sha256:21235120f8d756fa75ba430d0b0dbb04620fbd7bfac92ed6a0b911915ba38918"},
+]
+
+[package.dependencies]
+django = ">=2.2"
+
+[package.extras]
+docs = ["sphinx"]
+test = ["boto3", "celery", "django-storages", "pytest", "pytest-cov", "pytest-django", "redis"]
+
+[[package]]
 name = "djangorestframework"
 version = "3.15.1"
 description = "Web APIs for Django, made easy."
@@ -545,4 +563,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "380765895a21a62a59b7bc4ad5bb1f82c7982a60236607666ad2416ce1754ee3"
+content-hash = "fcbf21e998849f61c53ec454d86ce739a76f0d3713176117a3b97888383c1db1"
