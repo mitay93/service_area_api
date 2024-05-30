@@ -137,8 +137,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -170,12 +168,15 @@ AWS_S3_ACCESS_KEY_ID = env("AWS_S3_ACCESS_KEY_ID", "")
 AWS_S3_SECRET_ACCESS_KEY = env("AWS_S3_SECRET_ACCESS_KEY", "")
 AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME", "")
 AWS_S3_REGION_NAME = env("AWS_S3_REGION_NAME", "")
+AWS_S3_CUSTOM_DOMAIN = env("AWS_S3_CUSTOM_DOMAIN", "")
+STATICFILES_LOCATION = 'static'
+STATIC_URL = f"//{AWS_S3_CUSTOM_DOMAIN}/${STATICFILES_LOCATION}/"
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
     },
     "staticfiles": {
-        "BACKEND": "storages.backends.s3.S3Storage",
+        "BACKEND": "service_area_api.storages.S3RewriteStorage",
     }
 }
 
