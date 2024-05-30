@@ -2,7 +2,7 @@ name: "service-area-api"
 
 services:
   backend:
-    image: <image from github registry when i configure it>
+    image: ghcr.io/mitay93/service_area_api:master
     env_file:
       - .env
     restart: always

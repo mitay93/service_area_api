@@ -42,4 +42,28 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+      - name: Upload docker-compose.yml
+        uses: actions/upload-artifact@v3
+        with:
+          name: compose
+          path: docker-compose.yml
 
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Download file to be deployed
+        uses: actions/download-artifact@v3
+        with:
+          name: compose
+
+      - name: Deploy
+        run: | 
+          cp docker-compose.yml /home/ubuntu
+          cd /home/ubuntu
+          docker compose pull
+          docker compose up -d
+          
